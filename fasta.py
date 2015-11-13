@@ -53,7 +53,22 @@ def parse_fasta(fasta):
     return parse
 
 
+def output_making(parse):
+    """
+    Create the output file at the end of the analysis
+    Input:
+        parse : concatenated list of sequence name, sequence and sequence length
+    """
+    
+    size = len(parse[0])
+
+    with open('fasta.log', 'w') as filout:
+        filout.write("\n{0} sequence(s) has been found in this file\n".format(size))
+        filout.write("name\tlength\n")
+        for i in range(size):
+            filout.write("{0}\t{1}\n".format(parse[0][i], parse[2][i]))
+
 if __name__ == '__main__':
     fasta = fasta_input()
     infos = parse_fasta(fasta)
-    print infos
+    output_making(infos)
